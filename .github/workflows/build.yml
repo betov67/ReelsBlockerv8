@@ -1,0 +1,30 @@
+name: Build Android APK v8
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        
+      - name: Build APK
+        run: |
+          BUILD_FILE=$(find . -name "build.gradle*" -type f | head -n 1)
+          PROJECT_DIR=$(dirname "$BUILD_FILE")
+          cd "$PROJECT_DIR"
+          chmod +x gradlew || true
+          ./gradlew assembleDebug || gradle assembleDebug
+        
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ReelsBlocker-v8-APK
+          path: '**/app/build/outputs/apk/debug/*.apk'
