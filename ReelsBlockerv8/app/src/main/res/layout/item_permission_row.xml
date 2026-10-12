@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    item_permission_row.xml
+    Re-usable row card for each permission/service.
+
+    The MainActivity sets the title, description, and button text/state
+    dynamically — these attributes are therefore left as placeholders here.
+    In a production app you would use data-binding or a custom ViewGroup;
+    for simplicity we use individual IDs that the Activity manipulates directly.
+
+    NOTE: Because this layout is used with <include> and then the Activity
+    finds child views via row.findViewById(), each row's IDs must be the same
+    across all includes. The Activity references them via the parent row View.
+-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <!-- Text column -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="12dp">
+
+            <TextView
+                android:id="@+id/tv_row_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Permission"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/tv_row_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="2dp"
+                android:lineSpacingExtra="1dp" />
+
+        </LinearLayout>
+
+        <!-- Action button -->
+        <Button
+            android:id="@+id/btn_row_action"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_grant"
+            android:textSize="13sp"
+            android:minWidth="80dp" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

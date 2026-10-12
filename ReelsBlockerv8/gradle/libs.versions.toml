@@ -1,0 +1,19 @@
+[versions]
+agp                   = "8.7.0"
+kotlin                = "2.0.21"
+coreKtx               = "1.13.1"
+appcompat             = "1.7.0"
+material              = "1.12.0"
+cardview              = "1.0.0"
+lifecycleRuntimeKtx   = "2.8.6"
+
+[libraries]
+androidx-core-ktx              = { group = "androidx.core",      name = "core-ktx",              version.ref = "coreKtx" }
+androidx-appcompat             = { group = "androidx.appcompat",  name = "appcompat",             version.ref = "appcompat" }
+material                       = { group = "com.google.android.material", name = "material",      version.ref = "material" }
+androidx-cardview              = { group = "androidx.cardview",   name = "cardview",              version.ref = "cardview" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android      = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

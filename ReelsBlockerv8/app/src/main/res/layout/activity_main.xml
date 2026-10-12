@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_main.xml
+    Minimalist single-screen layout.
+
+    Structure:
+     ScrollView
+      └─ LinearLayout (vertical)
+          ├─ Header card     (status icon + text)
+          ├─ Section label   "Permissions & Services"
+          ├─ Permission row  Accessibility Service   [row_accessibility]
+          ├─ Permission row  Device Administrator    [row_device_admin]
+          ├─ Permission row  Battery Optimization    [row_battery]
+          ├─ Permission row  OEM Autostart           [row_notification]
+          ├─ Permission row  Foreground Service      [row_service]
+          └─ Footer note
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- ── Status Card ──────────────────────────────────────────────── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/surface">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="28dp">
+
+                <ImageView
+                    android:id="@+id/iv_status_icon"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_status_inactive"
+                    android:contentDescription="@string/status_icon_desc"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_status_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_inactive"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_status_subtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_inactive_sub"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:gravity="center"
+                    android:lineSpacingExtra="2dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── Section Label ────────────────────────────────────────────── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/section_permissions"
+            android:textSize="12sp"
+            android:textAllCaps="true"
+            android:letterSpacing="0.12"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="4dp" />
+
+        <!-- ── Accessibility Row ─────────────────────────────────────────── -->
+        <include
+            android:id="@+id/row_accessibility"
+            layout="@layout/item_permission_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <!-- ── Device Admin Row ──────────────────────────────────────────── -->
+        <include
+            android:id="@+id/row_device_admin"
+            layout="@layout/item_permission_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <!-- ── Battery Optimization Row ──────────────────────────────────── -->
+        <include
+            android:id="@+id/row_battery"
+            layout="@layout/item_permission_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <!-- ── OEM Autostart Row ─────────────────────────────────────────── -->
+        <!--  id="row_notification" kept for backwards compat; repurposed for autostart  -->
+        <include
+            android:id="@+id/row_notification"
+            layout="@layout/item_permission_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <!-- ── Foreground Service Row ─────────────────────────────────────── -->
+        <include
+            android:id="@+id/row_service"
+            layout="@layout/item_permission_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp" />
+
+        <!-- ── Footer note ───────────────────────────────────────────────── -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/footer_note"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:lineSpacingExtra="3dp" />
+
+    </LinearLayout>
+</ScrollView>

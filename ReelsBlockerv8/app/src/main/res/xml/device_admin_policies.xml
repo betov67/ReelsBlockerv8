@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Device Admin policies for ReelsBlocker.
+
+    We declare only the policies that are truly needed to protect the service
+    from easy uninstallation. We do NOT request any intrusive policies such as
+    wiping the device, locking the screen remotely, or enforcing password rules.
+
+    The sole goal of Device Admin here is to show the Device-Admin deactivation
+    confirmation screen before the user can uninstall the app, giving them a
+    moment to reconsider ("you are about to remove your focus tool").
+-->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <!--
+            No specific policies are needed beyond registration itself.
+            Simply being a Device Admin prevents trivial 1-tap uninstall;
+            the user must first go to Settings → Security → Device Admin Apps
+            and deactivate this app before uninstalling it.
+
+            If in the future you want to add a policy (e.g. lock screen), add
+            the corresponding tag here, e.g.:
+                <force-lock />
+                <encrypted-storage />
+            We intentionally leave this minimal.
+        -->
+    </uses-policies>
+</device-admin>

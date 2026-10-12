@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ── Permissions ─────────────────────────────────────────────────── -->
+
+    <!-- Foreground service (always required) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- Foreground service type: specialUse (required Android 14+ / API 34+) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <!-- Restart service after device reboot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Post a persistent notification (required Android 13+ / API 33+) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- Device Admin API — lets us register AppDeviceAdminReceiver -->
+    <uses-permission android:name="android.permission.BIND_DEVICE_ADMIN" />
+
+    <!-- ── Application ─────────────────────────────────────────────────── -->
+
+    <application
+        android:name=".ReelsBlockerApp"
+        android:allowBackup="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.ReelsBlocker"
+        tools:targetApi="31">
+
+        <!-- ── Main Activity ──────────────────────────────────────────── -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- ── Accessibility Service ──────────────────────────────────── -->
+        <!--
+            flagReportViewIds  — getViewIdResourceName() works
+            canRetrieveWindowContent — rootInActiveWindow available
+            Monitors only com.instagram.android to minimise battery use.
+        -->
+        <service
+            android:name=".ReelsBlockerAccessibilityService"
+            android:exported="true"
+            android:label="@string/accessibility_service_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <!-- ── Foreground Service ─────────────────────────────────────── -->
+        <!--
+            foregroundServiceType="specialUse" is mandatory on API 34+
+            when the service does not fit a more specific type.
+            Uses notification channel "reels_blocker_v4" (IMPORTANCE_HIGH,
+            silent) to resist OEM battery killers (MIUI, HyperOS, etc.).
+            stopWithTask="false" + onTaskRemoved() + an AlarmManager
+            fallback (see BlockerForegroundService) fight HyperOS/MIUI's
+            observed habit of killing the process anyway when the task is
+            swiped from Recents.
+        -->
+        <service
+            android:name=".BlockerForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse"
+            android:stopWithTask="false">
+
+            <!-- Required descriptor for specialUse type (Play Store review) -->
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Keeps the Reels-blocking accessibility service alive in the background." />
+        </service>
+
+        <!-- ── Device Admin Receiver ──────────────────────────────────── -->
+        <!--
+            Makes the app harder to uninstall: the user must first
+            deactivate Device Administrator in Settings → Security.
+            No device-management policies are declared.
+        -->
+        <receiver
+            android:name=".AppDeviceAdminReceiver"
+            android:exported="true"
+            android:label="@string/device_admin_label"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin_policies" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- ── Boot Receiver ──────────────────────────────────────────── -->
+        <!--
+            Restarts BlockerForegroundService after reboot so the user
+            doesn't have to open the app manually each time.
+        -->
+        <receiver
+            android:name=".BootReceiver"
+            android:exported="true">
+            <intent-filter android:priority="999">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <!-- HTC / MIUI fast-boot -->
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>

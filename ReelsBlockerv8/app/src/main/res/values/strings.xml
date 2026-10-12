@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Reels Blocker</string>
+
+    <!-- Accessibility Service -->
+    <string name="accessibility_service_label">Reels Blocker Service</string>
+    <string name="accessibility_service_description">
+        Monitors Instagram to block Reels in the main feed and prevent
+        swiping between Reels opened from profiles or direct messages.
+    </string>
+
+    <!-- Device Admin -->
+    <string name="device_admin_label">Reels Blocker Admin</string>
+    <string name="device_admin_explanation">
+        Activating Device Administrator makes it harder to accidentally
+        uninstall this focus tool. No sensitive policies are applied.
+    </string>
+    <string name="device_admin_enabled_msg">Reels Blocker is now protected ✓</string>
+    <string name="device_admin_disabled_msg">Reels Blocker protection removed.</string>
+    <string name="device_admin_disable_warning">
+        Deactivating admin protection means Reels Blocker can be uninstalled
+        without this confirmation step. Are you sure?
+    </string>
+
+    <!-- Notification -->
+    <string name="notification_channel_name">Reels Blocker Status</string>
+    <string name="notification_channel_desc">Shows when the Reels blocker is active.</string>
+    <string name="notification_title">Feed Reels Blocker Active</string>
+    <string name="notification_text">Blocking Reels in the home feed · swipe blocked in player</string>
+
+    <!-- Notification — watchdog warning state (v4): shown when the
+         foreground service's watchdog detects the Accessibility Service
+         has disconnected. Tapping this notification opens Accessibility
+         settings directly so the user can re-enable it in one tap. -->
+    <string name="notification_title_warning">Reels Blocker needs attention</string>
+    <string name="notification_text_warning">Accessibility Service was disabled — tap to re-enable it</string>
+
+    <!-- Status card -->
+    <string name="status_icon_desc">Current status icon</string>
+    <string name="status_fully_active">Fully Active</string>
+    <string name="status_fully_active_sub">All protections are enabled.\nReels blocking is running.</string>
+    <string name="status_partially_active">Partially Active</string>
+    <string name="status_partially_active_sub">Core blocking is on, but some optional\nprotections are missing.</string>
+    <string name="status_inactive">Inactive</string>
+    <string name="status_inactive_sub">Enable the Accessibility Service\nbelow to start blocking.</string>
+
+    <!-- Section label -->
+    <string name="section_permissions">Permissions &amp; Services</string>
+
+    <!-- Permission rows — titles and descriptions -->
+    <string name="perm_accessibility_title">Accessibility Service</string>
+    <string name="perm_accessibility_desc">Required — detects and blocks Reels interactions.</string>
+
+    <string name="perm_admin_title">Device Administrator</string>
+    <string name="perm_admin_desc">Recommended — prevents accidental uninstall.</string>
+
+    <string name="perm_battery_title">Battery Optimization</string>
+    <string name="perm_battery_desc">Recommended — prevents the OS from killing the service.</string>
+
+    <string name="perm_autostart_title">OEM Autostart</string>
+    <string name="perm_autostart_desc">Recommended — allow app to restart after reboot on Xiaomi, Huawei, OPPO &amp; similar.</string>
+
+    <string name="perm_service_title">Foreground Service</string>
+    <string name="perm_service_desc">Required — keeps the blocker running in the background.</string>
+
+    <!-- Button labels -->
+    <string name="btn_grant">Grant</string>
+    <string name="btn_activate">Activate</string>
+    <string name="btn_exclude">Exclude</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_check">Check</string>
+    <string name="btn_open_settings">Open Settings</string>
+
+    <!-- Row state labels (shown when already active) -->
+    <string name="status_granted">Granted ✓</string>
+    <string name="status_active">Active ✓</string>
+    <string name="status_excluded">Excluded ✓</string>
+    <string name="status_running">Running ✓</string>
+    <string name="status_done">Done ✓</string>
+
+    <!-- Dialogs -->
+    <string name="dialog_accessibility_title">Enable Accessibility Service</string>
+    <string name="dialog_accessibility_message">
+        In the next screen:\n\n
+        1. Tap \"Downloaded apps\" or \"Installed apps\"\n
+        2. Select \"Reels Blocker Service\"\n
+        3. Toggle it ON\n
+        4. Tap OK on the confirmation dialog\n\n
+        Then return to this app.
+    </string>
+
+    <!-- OEM Autostart dialog -->
+    <string name="dialog_autostart_title">Allow Autostart</string>
+
+    <string name="autostart_instructions_miui">
+        On MIUI / HyperOS:\n\n
+        1. Open Security app\n
+        2. Tap \"App lock\" → \"Manage apps\"\n
+        OR go to Settings → Apps → Manage apps → Reels Blocker\n
+        3. Tap \"Autostart\" and enable it\n
+        4. Also enable \"Battery saver\" → \"No restrictions\" for this app\n\n
+        Then return here and tap Start on the service row.
+    </string>
+
+    <string name="autostart_instructions_emui">
+        On EMUI / HarmonyOS:\n\n
+        1. Open Settings → Apps → Apps\n
+        2. Find \"Reels Blocker\" and tap it\n
+        3. Tap \"Battery\" → select \"Run in background\"\n
+        4. Go back, tap \"Startup\" and enable \"Auto-launch\"\n\n
+        Then return here and tap Start on the service row.
+    </string>
+
+    <string name="autostart_instructions_coloros">
+        On ColorOS / OxygenOS / realme UI:\n\n
+        1. Open Settings → Battery → Battery optimization\n
+        2. Tap the three-dot menu → \"All apps\"\n
+        3. Find \"Reels Blocker\" → select \"Don\'t optimize\"\n
+        4. Also go to Settings → Apps → Reels Blocker → Battery → Allow background activity\n\n
+        Then return here and tap Start on the service row.
+    </string>
+
+    <string name="autostart_instructions_vivo">
+        On Vivo / iQOO:\n\n
+        1. Open iManager (or Settings → Battery)\n
+        2. Tap \"Background app management\" or \"High-power apps\"\n
+        3. Enable \"Reels Blocker\" in the list\n
+        4. Also go to Settings → Apps → Reels Blocker → Permissions → Autostart\n\n
+        Then return here and tap Start on the service row.
+    </string>
+
+    <string name="autostart_instructions_samsung">
+        On Samsung One UI:\n\n
+        1. Open Settings → Apps → Reels Blocker\n
+        2. Tap \"Battery\" → select \"Unrestricted\"\n
+        3. Go back to Apps list → tap three-dot menu → \"Special access\" → \"Optimize battery usage\"\n
+        4. Switch from \"Apps\" to \"All apps\", find Reels Blocker and turn it OFF\n\n
+        Then return here and tap Start on the service row.
+    </string>
+
+    <string name="autostart_instructions_generic">
+        To keep the blocker running reliably:\n\n
+        1. Go to Settings → Apps → Reels Blocker → Battery\n
+        2. Select \"Unrestricted\" or \"Don\'t optimize\"\n
+        3. If your phone has an autostart setting, enable it for Reels Blocker\n\n
+        Then return here and tap Start on the service row.
+    </string>
+
+    <!-- Footer -->
+    <string name="footer_note">No data is collected or shared.\nAll processing happens on-device.</string>
+</resources>
